@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="student">
+      <h2 data-cy="studentDetailsHeading"><span>Student</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ student.id }}</span>
+        </dd>
+        <dt><span>Studentname</span></dt>
+        <dd>
+          <span>{{ student.studentname }}</span>
+        </dd>
+        <dt><span>Standard</span></dt>
+        <dd>
+          <span>{{ student.standard }}</span>
+        </dd>
+        <dt><span>Rollno</span></dt>
+        <dd>
+          <span>{{ student.rollno }}</span>
+        </dd>
+        <dt><span>Age</span></dt>
+        <dd>
+          <span>{{ student.age }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/student', student.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

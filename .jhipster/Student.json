@@ -1,0 +1,47 @@
+{
+  "fields": [
+    {
+      "fieldName": "studentname",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "3",
+      "fieldValidateRulesMaxlength": 20
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMin": "1",
+      "fieldValidateRulesMax": 100
+    },
+    {
+      "fieldName": "rollno",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMin": "1",
+      "fieldValidateRulesMax": 100
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMin": "1",
+      "fieldValidateRulesMax": 100
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "subject",
+      "otherEntityName": "subject",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "student"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Student",
+  "changelogDate": "20210930055804"
+}

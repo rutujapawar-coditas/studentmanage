@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-subject-heading" data-cy="SubjectCreateUpdateHeading">Create or edit a Subject</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_subjectname">Subjectname</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subjectname"
+            id="field_subjectname"
+            data-cy="subjectname"
+            formControlName="subjectname"
+          />
+          <div *ngIf="editForm.get('subjectname')!.invalid && (editForm.get('subjectname')!.dirty || editForm.get('subjectname')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('subjectname')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('subjectname')?.errors?.minlength">
+              This field is required to be at least 3 characters.
+            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('subjectname')?.errors?.maxlength">
+              This field cannot be longer than 20 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_bookname">Bookname</label>
+          <input type="text" class="form-control" name="bookname" id="field_bookname" data-cy="bookname" formControlName="bookname" />
+          <div *ngIf="editForm.get('bookname')!.invalid && (editForm.get('bookname')!.dirty || editForm.get('bookname')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('bookname')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('bookname')?.errors?.minlength">
+              This field is required to be at least 3 characters.
+            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('bookname')?.errors?.maxlength">
+              This field cannot be longer than 20 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dailyhours">Dailyhours</label>
+          <input
+            type="number"
+            class="form-control"
+            name="dailyhours"
+            id="field_dailyhours"
+            data-cy="dailyhours"
+            formControlName="dailyhours"
+          />
+          <div *ngIf="editForm.get('dailyhours')!.invalid && (editForm.get('dailyhours')!.dirty || editForm.get('dailyhours')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('dailyhours')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('dailyhours')?.errors?.min"> This field should be at least 1. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dailyhours')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_student">Student</label>
+          <select class="form-control" id="field_student" data-cy="student" name="student" formControlName="student">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption"
+              *ngFor="let studentOption of studentsSharedCollection; trackBy: trackStudentById"
+            >
+              {{ studentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="subject">
+      <h2 data-cy="subjectDetailsHeading"><span>Subject</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ subject.id }}</span>
+        </dd>
+        <dt><span>Subjectname</span></dt>
+        <dd>
+          <span>{{ subject.subjectname }}</span>
+        </dd>
+        <dt><span>Bookname</span></dt>
+        <dd>
+          <span>{{ subject.bookname }}</span>
+        </dd>
+        <dt><span>Dailyhours</span></dt>
+        <dd>
+          <span>{{ subject.dailyhours }}</span>
+        </dd>
+        <dt><span>Student</span></dt>
+        <dd>
+          <div *ngIf="subject.student">
+            <a [routerLink]="['/student', subject.student?.id, 'view']">{{ subject.student?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/subject', subject.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
